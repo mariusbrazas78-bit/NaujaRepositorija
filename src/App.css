@@ -152,6 +152,44 @@
   outline-offset: 3px;
 }
 
+.password-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrap input {
+  width: 100%;
+  padding-right: 48px;
+}
+
+.password-visibility-toggle {
+  position: absolute;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.password-visibility-toggle:hover {
+  color: var(--accent);
+}
+
+.password-visibility-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
 .login-forgot-password {
   align-self: center;
   margin-top: -8px;

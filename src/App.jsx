@@ -15,6 +15,7 @@ function App() {
   const [activePage, setActivePage] = useState("home");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
 
@@ -115,15 +116,26 @@ function App() {
 
                     <label className="login-field">
                       <span>Slaptažodis</span>
-                      <input
-                        type="password"
-                        name="password"
-                        autoComplete="current-password"
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        required
-                      />
+                      <span className="password-input-wrap">
+                        <input
+                          type={isPasswordVisible ? "text" : "password"}
+                          name="password"
+                          autoComplete="current-password"
+                          placeholder="••••••••"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
+                          required
+                        />
+                        <button
+                          type="button"
+                          className="password-visibility-toggle"
+                          onClick={() => setIsPasswordVisible((visible) => !visible)}
+                          aria-label={isPasswordVisible ? "Slėpti slaptažodį" : "Rodyti slaptažodį"}
+                          aria-pressed={isPasswordVisible}
+                        >
+                          👁
+                        </button>
+                      </span>
                     </label>
 
                     <button type="submit" className="login-submit">
