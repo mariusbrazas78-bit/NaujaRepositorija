@@ -130,6 +130,14 @@ function App() {
                       Prisijungti
                     </button>
 
+                    <a
+                      className="login-forgot-password"
+                      href="#"
+                      onClick={(event) => event.preventDefault()}
+                    >
+                      Pamiršote slaptažodį?
+                    </a>
+
                     {loginError && (
                       <p className="login-error" role="alert">
                         {loginError}
