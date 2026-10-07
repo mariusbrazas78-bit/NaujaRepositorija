@@ -16,6 +16,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
 
@@ -136,6 +137,16 @@ function App() {
                           👁
                         </button>
                       </span>
+                    </label>
+
+                    <label className="remember-me">
+                      <input
+                        type="checkbox"
+                        name="rememberMe"
+                        checked={rememberMe}
+                        onChange={(event) => setRememberMe(event.target.checked)}
+                      />
+                      <span>Prisiminti mane</span>
                     </label>
 
                     <button type="submit" className="login-submit">

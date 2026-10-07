@@ -123,6 +123,25 @@
   box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
+.remember-me {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: -8px;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.remember-me input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 .login-submit {
   margin-top: 8px;
   padding: 13px 20px;
