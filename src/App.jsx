@@ -97,7 +97,7 @@ function App() {
               <div className="login-card">
                 <>
                   <header className="login-card__header">
-                    <h1>Prisijungti</h1>
+                    <h1>Sveiki sugrįžę!</h1>
                     <p>Įveskite savo duomenis, kad tęstumėte</p>
                   </header>
 
