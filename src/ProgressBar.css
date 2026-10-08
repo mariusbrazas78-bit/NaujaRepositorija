@@ -41,68 +41,21 @@
   font-weight: 600;
 }
 
-/* Pats slideris */
-.progress-slider {
+.progress-bar {
   width: 100%;
-  height: 14px;
-  margin: 0;
-
-  appearance: none;
-  -webkit-appearance: none;
-
+  height: 12px;
+  overflow: hidden;
   border-radius: 999px;
-  outline: none;
-  cursor: pointer;
-
-  background: linear-gradient(
-    to right,
-    var(--accent) 0%,
-    var(--accent) var(--progress),
-    var(--accent-bg) var(--progress),
-    var(--accent-bg) 100%
-  );
-
+  background: var(--accent-bg);
   border: 1px solid var(--accent-border);
 }
 
-/* Chrome, Edge, Safari */
-.progress-slider::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-
+.progress-bar__fill {
+  display: block;
+  height: 100%;
   background: var(--accent);
-  border: 3px solid var(--bg);
-
-  box-shadow: 0 0 0 2px var(--accent-border);
-
-  cursor: grab;
-}
-
-.progress-slider::-webkit-slider-thumb:active {
-  cursor: grabbing;
-  transform: scale(1.08);
-}
-
-/* Firefox */
-.progress-slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-
-  background: var(--accent);
-  border: 3px solid var(--bg);
-
-  box-shadow: 0 0 0 2px var(--accent-border);
-
-  cursor: grab;
-}
-
-.progress-slider:focus-visible {
-  box-shadow: 0 0 0 3px var(--accent-bg);
+  border-radius: inherit;
+  transition: width 0.35s ease;
 }
 
 @media (max-width: 1024px) {

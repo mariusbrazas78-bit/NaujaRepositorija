@@ -1,47 +1,43 @@
 import { useState } from "react";
 import "./AddTaskForm.css";
 
-function AddTaskForm({ onAddTask }) {
+function AddTaskForm({ onAddTask, error = "" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [deadline, setDeadline] = useState("");
-  const [status, setStatus] = useState("Nepradėta");
+  const [status, setStatus] = useState("pending");
+  const [isSaving, setIsSaving] = useState(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    if (isSaving) return;
 
-    const newTask = {
-      id: Date.now(),
-      title,
-      status,
-      deadline,
-    };
+    setIsSaving(true);
+    const saved = await onAddTask({ title: title.trim(), status, deadline });
+    setIsSaving(false);
 
-    onAddTask(newTask);
-
-    setTitle("");
-    setDeadline("");
-    setStatus("Nepradėta");
-    setIsOpen(false);
+    if (saved) {
+      setTitle("");
+      setDeadline("");
+      setStatus("pending");
+      setIsOpen(false);
+    }
   }
 
   function handleCancel() {
     setTitle("");
     setDeadline("");
-    setStatus("Nepradėta");
+    setStatus("pending");
     setIsOpen(false);
   }
 
   if (!isOpen) {
     return (
       <div className="add-task">
-        <button
-          type="button"
-          className="add-task__open-button"
-          onClick={() => setIsOpen(true)}
-        >
+        <button type="button" className="add-task__open-button" onClick={() => setIsOpen(true)}>
           + Nauja užduotis
         </button>
+        {error && <p className="add-task__error" role="alert">{error}</p>}
       </div>
     );
   }
@@ -54,65 +50,31 @@ function AddTaskForm({ onAddTask }) {
             <h2>Nauja užduotis</h2>
             <p>Pridėkite naują užduotį į savo sąrašą</p>
           </div>
-
-          <button
-            type="button"
-            className="add-task__close"
-            onClick={handleCancel}
-            aria-label="Uždaryti"
-          >
-            ×
-          </button>
+          <button type="button" className="add-task__close" onClick={handleCancel} aria-label="Uždaryti">×</button>
         </div>
 
         <form className="add-task__form" onSubmit={handleSubmit}>
           <label className="add-task__field">
             <span>Užduoties pavadinimas</span>
-
-            <input
-              type="text"
-              placeholder="Pvz. Sukurti profilio puslapį"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-              required
-            />
+            <input type="text" placeholder="Pvz. Sukurti profilio puslapį" value={title} onChange={(event) => setTitle(event.target.value)} maxLength={120} required />
           </label>
-
           <label className="add-task__field">
             <span>Terminas</span>
-
-            <input
-              type="date"
-              value={deadline}
-              onChange={(event) => setDeadline(event.target.value)}
-              required
-            />
+            <input type="date" value={deadline} onChange={(event) => setDeadline(event.target.value)} required />
           </label>
-
           <label className="add-task__field">
-            <span>Statusas</span>
-
-            <select
-              value={status}
-              onChange={(event) => setStatus(event.target.value)}
-            >
-              <option value="Nepradėta">Nepradėta</option>
-              <option value="Vykdoma">Vykdoma</option>
-              <option value="Atlikta">Atlikta</option>
+            <span>Būsena</span>
+            <select value={status} onChange={(event) => setStatus(event.target.value)}>
+              <option value="pending">Nepradėta</option>
+              <option value="in_progress">Vykdoma</option>
+              <option value="completed">Atlikta</option>
             </select>
           </label>
-
+          {error && <p className="add-task__error" role="alert">{error}</p>}
           <div className="add-task__actions">
-            <button
-              type="button"
-              className="add-task__cancel"
-              onClick={handleCancel}
-            >
-              Atšaukti
-            </button>
-
-            <button type="submit" className="add-task__submit">
-              Pridėti užduotį
+            <button type="button" className="add-task__cancel" onClick={handleCancel} disabled={isSaving}>Atšaukti</button>
+            <button type="submit" className="add-task__submit" disabled={isSaving}>
+              {isSaving ? "Išsaugoma..." : "Išsaugoti užduotį"}
             </button>
           </div>
         </form>

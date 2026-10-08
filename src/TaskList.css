@@ -73,6 +73,44 @@
   color: var(--accent);
   cursor: pointer;
   font-family: inherit;
+  cursor: default;
+}
+
+.task-status--completed,
+.task-status--Atlikta {
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.14);
+}
+
+.task-status--in_progress,
+.task-status--Vykdoma {
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.15);
+}
+
+.task-status--pending,
+.task-status--Nepradėta {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.14);
+}
+
+.task-days {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.task-days--overdue {
+  border-color: rgba(248, 113, 113, 0.32);
+  background: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
 }
 
 .task-status:focus-visible {
@@ -99,6 +137,10 @@
   margin: 10px 0 0;
   font-size: 14px;
   color: var(--text);
+}
+
+.task-deadline time {
+  color: var(--text-h);
 }
 
 .task-deadline input {
